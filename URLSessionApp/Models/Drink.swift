@@ -5,8 +5,6 @@
 //  Created by Aleksandr Rybachev on 08.04.2022.
 //
 
-import Foundation
-
 struct Drink: Decodable {
     let drinks: [Coctail]
 }
@@ -52,11 +50,19 @@ struct Coctail: Decodable {
     let strImageSource: String?
     let strImageAttribution: String?
     let strCreativeCommonsConfirmed: String?
-}
-
-extension Drink {
-    static func getData() {
-        NetworkManager.fetchData()
+    
+    var ingredients: String? {
+        """
+        Ingredients:
+        - \(strMeasure1 ?? "") \(strIngredient1 ?? "")
+        - \(strMeasure2 ?? "") \(strIngredient2 ?? "")
+        - \(strMeasure3 ?? "") \(strIngredient3 ?? "")
+        - \(strMeasure4 ?? "") \(strIngredient4 ?? "")
+        - \(strMeasure5 ?? "") \(strIngredient5 ?? "")
+        """
     }
 }
 
+enum Link: String {
+    case coctailsAPI = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"
+}
